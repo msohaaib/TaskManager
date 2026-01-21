@@ -4,32 +4,29 @@ import passwordIcon from "../assets/icons/password.svg";
 import googleIcon from "../assets/icons/Google.svg";
 import facebookIcon from "../assets/icons/facebook.svg";
 import { Link } from "react-router-dom";
+import { login, loginWithGoogle } from "../auth.js";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  function onSubmit(data) {
-    console.log(data);
-  }
+  const onSubmit = async (data) => {
+    try {
+      await login(data.email, data.password);
+      alert("Login successful!");
+      navigate("/dashboard");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <>
       <div className="flex flex-row">
-        <div className="bg-[#E9EAEC] w-1/2 h-screen flex flex-col items-center justify-center">
-          <h1 className="font-semibold text-3xl">
-            The only way to{" "}
-            <span className="text-[#3062D4]">do great work</span> is{" "}
-            <to>" "</to>
-            <br />
-            <span className="text-[#3062D4]">love what you do.</span>
-          </h1>
-          <p className="font-semibold text-3xl text-[#3A424A] mt-4">
-            -Steve Jobs
-          </p>
-        </div>
         <div className="w-1/2 h-screen flex flex-col items-center justify-center">
           <h1 className="font-semibold text-3xl mb-10">Sign In</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -97,7 +94,10 @@ const Login = () => {
             <div className="h-px w-43.25 bg-[#E4E6EC] flex-1"></div>
           </div>
           <div className="flex flex-row gap-x-10 mt-6">
-            <button className="w-45.5 h-11.25 flex flex-row gap-x-3 items-center justify-center border border-[#E4E6EC] rounded-lg">
+            <button
+              onClick={() => loginWithGoogle("google")}
+              className="w-45.5 h-11.25 flex flex-row gap-x-3 items-center justify-center border border-[#E4E6EC] rounded-lg"
+            >
               <img src={googleIcon} className="h-6 w-6" alt="Google Icon" />
               <span>Google</span>
             </button>
@@ -112,6 +112,16 @@ const Login = () => {
               Sign Up
             </Link>
           </div>
+        </div>
+        <div className="bg-[#E9EAEC] w-1/2 h-screen flex flex-col items-center justify-center">
+          <h1 className="font-semibold text-3xl">
+            The only way to{" "}
+            <span className="text-[#3062D4]">do great work</span> is <br />
+            <span className="text-[#3062D4]">love what you do.</span>
+          </h1>
+          <p className="font-semibold text-3xl text-[#3A424A] mt-4">
+            -Steve Jobs
+          </p>
         </div>
       </div>
     </>

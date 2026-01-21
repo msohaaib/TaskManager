@@ -1,9 +1,11 @@
 import { useForm } from "react-hook-form";
+import fullNameIcon from "../assets/icons/fullname.svg";
 import emailIcon from "../assets/icons/email.svg";
 import passwordIcon from "../assets/icons/password.svg";
 import googleIcon from "../assets/icons/Google.svg";
 import facebookIcon from "../assets/icons/facebook.svg";
 import { Link } from "react-router-dom";
+import { signup } from "../auth.js";
 
 const SignUp = () => {
   const {
@@ -13,8 +15,13 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      await signup(data.fullName, data.email, data.password);
+      alert("Signup successful! You can now login.");
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
@@ -35,6 +42,28 @@ const SignUp = () => {
         <h1 className="font-semibold text-3xl mb-10">Sign Up</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col">
+            {/* Full Name */}
+            <div className="relative mb-6">
+              <img
+                className="absolute left-3 top-1/2 w-[21.5px] h-[17.2px] -translate-y-1/2 text-gray-400"
+                src={fullNameIcon}
+                alt="Full Name Icon"
+              />
+              <input
+                {...register("fullName", {
+                  required: "Full name is required",
+                })}
+                placeholder="Full Name"
+                className={`border border-gray-400 w-100.75 h-11.25 pl-10 rounded-lg ${
+                  errors.fullName ? "border-red-500" : ""
+                }`}
+                type="text"
+              />
+              {/* Error message positioned below input */}
+              <p className="text-red-500 text-sm absolute left-0 -bottom-5">
+                {errors.fullName?.message}
+              </p>
+            </div>
             {/* Email */}
             <div className="relative mb-6">
               <img
