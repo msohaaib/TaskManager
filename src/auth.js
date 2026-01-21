@@ -57,5 +57,3 @@ export async function logout() {
     console.error("Logout error:", error);
   }
 }
-
-// https://nyc.cloud.appwrite.io/v1/account/sessions/oauth2/callback/google/6971293c001dd6819a7c
