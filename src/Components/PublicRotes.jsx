@@ -7,13 +7,16 @@ export default function PublicRoute({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getCurrentUser()
-      .then((u) => setUser(u))
-      .finally(() => setLoading(false));
+    async function fetchUser() {
+      const u = await getCurrentUser();
+      setUser(u);
+      setLoading(false);
+    }
+    fetchUser();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (user) return <Navigate to="/dashboard" replace />; // redirect logged-in users
+  if (loading) return null; // or a loader
+  if (user) return <Navigate to="/dashboard" replace />;
 
   return children;
 }

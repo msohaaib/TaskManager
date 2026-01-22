@@ -3,7 +3,6 @@ import fullNameIcon from "../assets/icons/fullname.svg";
 import emailIcon from "../assets/icons/email.svg";
 import passwordIcon from "../assets/icons/password.svg";
 import googleIcon from "../assets/icons/Google.svg";
-import facebookIcon from "../assets/icons/facebook.svg";
 import { Link } from "react-router-dom";
 import { signup } from "../auth.js";
 
@@ -156,14 +155,10 @@ const SignUp = () => {
           <div className="h-px w-43.25 bg-[#E4E6EC] flex-1"></div>
         </div>
 
-        <div className="flex flex-row gap-x-10 mt-6">
+        <div className="flex flex-row mt-6">
           <button className="w-45.5 h-11.25 flex flex-row gap-x-3 items-center justify-center border border-[#E4E6EC] rounded-lg">
             <img src={googleIcon} className="h-6 w-6" alt="Google Icon" />
             <span>Google</span>
-          </button>
-          <button className="w-45.5 h-11.25 flex flex-row gap-x-3 items-center justify-center border border-[#E4E6EC] rounded-lg">
-            <img src={facebookIcon} className="h-6 w-6" alt="Facebook Icon" />
-            <span>Facebook</span>
           </button>
         </div>
 

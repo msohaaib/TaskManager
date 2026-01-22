@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import emailIcon from "../assets/icons/email.svg";
 import passwordIcon from "../assets/icons/password.svg";
 import googleIcon from "../assets/icons/Google.svg";
-import facebookIcon from "../assets/icons/facebook.svg";
 import { Link } from "react-router-dom";
 import { login, loginWithGoogle } from "../auth.js";
 import { useNavigate } from "react-router-dom";
@@ -100,10 +99,6 @@ const Login = () => {
             >
               <img src={googleIcon} className="h-6 w-6" alt="Google Icon" />
               <span>Google</span>
-            </button>
-            <button className="w-45.5 h-11.25 flex flex-row gap-x-3 items-center justify-center border border-[#E4E6EC] rounded-lg">
-              <img src={facebookIcon} className="h-6 w-6" alt="Facebook Icon" />
-              <span>Facebook</span>
             </button>
           </div>
           <div className="mt-6">
