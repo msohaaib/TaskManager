@@ -24,22 +24,24 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex flex-row">
-      <div className="bg-[#E9EAEC] w-1/2 h-screen flex flex-col items-center justify-center">
-        <h1 className="font-semibold text-3xl">
+    <div className="flex flex-col md:flex-row">
+      {/* Left side (Text) */}
+      <div className="bg-[#E9EAEC] w-full md:w-1/2 h-screen flex flex-col items-center justify-center hidden md:flex">
+        <h1 className="font-semibold text-3xl text-center md:text-left">
           The only way to <span className="text-[#3062D4]">do great work</span>{" "}
           is
           <br />
           <span className="text-[#3062D4]">love what you do.</span>
         </h1>
-        <p className="font-semibold text-3xl text-[#3A424A] mt-4">
+        <p className="font-semibold text-3xl text-[#3A424A] mt-4 text-center md:text-left">
           -Steve Jobs
         </p>
       </div>
 
-      <div className="w-1/2 h-screen flex flex-col items-center justify-center">
-        <h1 className="font-semibold text-3xl mb-10">Sign Up</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      {/* Right side (Form) */}
+      <div className="w-full md:w-1/2 h-screen flex flex-col items-center justify-center px-6 md:px-0">
+        <h1 className="font-semibold text-3xl mb-10 text-center">Sign Up</h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-sm">
           <div className="flex flex-col">
             {/* Full Name */}
             <div className="relative mb-6">
@@ -53,16 +55,16 @@ const SignUp = () => {
                   required: "Full name is required",
                 })}
                 placeholder="Full Name"
-                className={`border border-gray-400 w-100.75 h-11.25 pl-10 rounded-lg ${
+                className={`border border-gray-400 w-full h-11.25 pl-10 rounded-lg ${
                   errors.fullName ? "border-red-500" : ""
                 }`}
                 type="text"
               />
-              {/* Error message positioned below input */}
               <p className="text-red-500 text-sm absolute left-0 -bottom-5">
                 {errors.fullName?.message}
               </p>
             </div>
+
             {/* Email */}
             <div className="relative mb-6">
               <img
@@ -79,12 +81,11 @@ const SignUp = () => {
                   },
                 })}
                 placeholder="Your email"
-                className={`border border-gray-400 w-100.75 h-11.25 pl-10 rounded-lg ${
+                className={`border border-gray-400 w-full h-11.25 pl-10 rounded-lg ${
                   errors.email ? "border-red-500" : ""
                 }`}
                 type="email"
               />
-              {/* Error message positioned below input */}
               <p className="text-red-500 text-sm absolute left-0 -bottom-5">
                 {errors.email?.message}
               </p>
@@ -106,7 +107,7 @@ const SignUp = () => {
                   },
                 })}
                 placeholder="Password"
-                className="border border-gray-400 w-100.75 h-11.25 pl-10 rounded-lg"
+                className="border border-gray-400 w-full h-11.25 pl-10 rounded-lg"
                 type="password"
               />
               {errors.password && (
@@ -130,7 +131,7 @@ const SignUp = () => {
                     value === getValues("password") || "Passwords do not match",
                 })}
                 placeholder="Repeat Password"
-                className="border border-gray-400 w-100.75 h-11.25 pl-10 rounded-lg"
+                className="border border-gray-400 w-full h-11.25 pl-10 rounded-lg"
                 type="password"
               />
               {errors.confirmPassword && (
@@ -142,27 +143,27 @@ const SignUp = () => {
           </div>
 
           <button
-            className="w-100.75 h-11.75 text-white bg-[#0062FF] mt-6 rounded-lg"
+            className="w-full h-11.75 text-white bg-[#0062FF] mt-6 rounded-lg"
             type="submit"
           >
             Sign Up
           </button>
         </form>
 
-        <div className="flex items-center mt-8">
-          <div className="h-px w-43.25 bg-[#E4E6EC] flex-1"></div>
+        <div className="flex items-center mt-8 w-full justify-center">
+          <div className="h-px w-1/3 bg-[#E4E6EC] flex-1"></div>
           <span className="px-4 text-gray-500">or</span>
-          <div className="h-px w-43.25 bg-[#E4E6EC] flex-1"></div>
+          <div className="h-px w-1/3 bg-[#E4E6EC] flex-1"></div>
         </div>
 
-        <div className="flex flex-row mt-6">
-          <button className="w-45.5 h-11.25 flex flex-row gap-x-3 items-center justify-center border border-[#E4E6EC] rounded-lg">
+        <div className="flex flex-row mt-6 w-full justify-center">
+          <button className="w-full md:w-45.5 h-11.25 flex flex-row gap-x-3 items-center justify-center border border-[#E4E6EC] rounded-lg">
             <img src={googleIcon} className="h-6 w-6" alt="Google Icon" />
             <span>Google</span>
           </button>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-6 text-center">
           <span className="text-gray-500">Already have an account? </span>
           <Link to="/" className="text-[#3062D4]">
             Log In
