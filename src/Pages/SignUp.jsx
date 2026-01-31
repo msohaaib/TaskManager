@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import fullNameIcon from "../assets/icons/fullname.svg";
+import fullNameIcon from "../assets/icons/fullName.svg";
 import emailIcon from "../assets/icons/email.svg";
 import passwordIcon from "../assets/icons/password.svg";
 import googleIcon from "../assets/icons/Google.svg";
