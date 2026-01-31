@@ -44,8 +44,8 @@ export async function getCurrentUser() {
 export async function loginWithGoogle() {
   await account.createOAuth2Session(
     "google",
-    "http://localhost:5173/dashboard", // success redirect after login
-    "http://localhost:5173/", // failure redirect
+    "https://task-manager-1-kappa.vercel.app/dashboard", // success redirect after login
+    "https://task-manager-1-kappa.vercel.app/",
   );
 }
 
