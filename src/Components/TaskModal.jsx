@@ -57,11 +57,8 @@ const TaskModal = ({ isOpen, onClose, onSave, task }) => {
   };
 
   return (
-    <div
-      key={task?.$id || "new-task"}
-      className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-brightness-50 backdrop-blur-sm bg-opacity-30"
-    >
-      <div className="bg-white p-6 rounded shadow-md w-96">
+    <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-brightness-50 backdrop-blur-sm bg-opacity-30 p-4">
+      <div className="bg-white p-6 rounded shadow-md w-full max-w-md sm:max-w-lg">
         <h2 className="text-lg font-semibold mb-4">
           {task ? "Edit Task" : "Add New Task"}
         </h2>
@@ -84,38 +81,40 @@ const TaskModal = ({ isOpen, onClose, onSave, task }) => {
           rows={4}
         />
 
-        <select
-          name="Priority"
-          value={formData.Priority}
-          onChange={handleChange}
-          className="w-full mb-2 px-3 py-2 border rounded"
-        >
-          {priorityOptions.map((p) => (
-            <option key={p} value={p}>
-              {p}
-            </option>
-          ))}
-        </select>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <select
+            name="Priority"
+            value={formData.Priority}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border rounded"
+          >
+            {priorityOptions.map((p) => (
+              <option key={p} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
 
-        <select
-          name="Status"
-          value={formData.Status}
-          onChange={handleChange}
-          className="w-full mb-2 px-3 py-2 border rounded"
-        >
-          {statusOptions.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
+          <select
+            name="Status"
+            value={formData.Status}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border rounded"
+          >
+            {statusOptions.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
+        </div>
 
         <input
           type="date"
           name="DueDate"
           value={formData.DueDate}
           onChange={handleChange}
-          className="w-full mb-4 px-3 py-2 border rounded"
+          className="w-full my-2 px-3 py-2 border rounded"
         />
 
         <div className="flex justify-end gap-2">

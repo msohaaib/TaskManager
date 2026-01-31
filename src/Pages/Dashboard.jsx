@@ -117,26 +117,42 @@ const Dashboard = () => {
   // Filter tasks for page, search, and priority
   const getTasksForPage = () => {
     let filtered = [...tasks];
+    const today = new Date();
 
     switch (activePage) {
       case "Completed Tasks":
-        filtered = filtered.filter((t) => t.Status === "Completed");
+        // Only completed tasks that are not overdue
+        filtered = filtered.filter(
+          (t) => t.Status === "Completed" && new Date(t.DueDate) >= today,
+        );
         break;
+
       case "In Progress Tasks":
-        filtered = filtered.filter((t) => t.Status === "In Progress");
+        // Exclude overdue tasks
+        filtered = filtered.filter(
+          (t) => t.Status === "In Progress" && new Date(t.DueDate) >= today,
+        );
         break;
+
+      case "Pending Tasks":
+        // Exclude overdue tasks
+        filtered = filtered.filter(
+          (t) => t.Status === "Pending" && new Date(t.DueDate) >= today,
+        );
+        break;
+
       case "Overdue Tasks":
-        {
-          const today = new Date();
-          filtered = filtered.filter(
-            (t) => new Date(t.DueDate) < today && t.Status !== "Completed",
-          );
-        }
+        // All overdue tasks except completed
+        filtered = filtered.filter(
+          (t) => new Date(t.DueDate) < today && t.Status !== "Completed",
+        );
         break;
+
       default:
         break;
     }
 
+    // Search filter
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       filtered = filtered.filter(
@@ -148,8 +164,11 @@ const Dashboard = () => {
       );
     }
 
+    // Priority filter
     if (priorityFilter !== "All") {
-      filtered = filtered.filter((t) => t.priority === priorityFilter);
+      filtered = filtered.filter(
+        (t) => t.Priority?.toLowerCase() === priorityFilter.toLowerCase(),
+      );
     }
 
     return filtered;
@@ -215,24 +234,53 @@ const Dashboard = () => {
           )}
         </div>
 
-        <main className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <main className="p-4 md:p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 mb-6">
             <StatsCard title="Total Tasks" value={tasks.length} />
+
+            {/* Completed Tasks (not overdue) */}
             <StatsCard
               title="Completed"
-              value={tasks.filter((t) => t.status === "Completed").length}
+              value={
+                tasks.filter(
+                  (t) =>
+                    t.Status === "Completed" &&
+                    new Date(t.DueDate) >= new Date(),
+                ).length
+              }
             />
+
+            {/* In Progress Tasks (not overdue) */}
+            <StatsCard
+              title="In Progress"
+              value={
+                tasks.filter(
+                  (t) =>
+                    t.Status === "In Progress" &&
+                    new Date(t.DueDate) >= new Date(),
+                ).length
+              }
+            />
+
+            {/* Pending Tasks (not overdue) */}
             <StatsCard
               title="Pending"
-              value={tasks.filter((t) => t.status !== "Completed").length}
+              value={
+                tasks.filter(
+                  (t) =>
+                    t.Status === "Pending" && new Date(t.DueDate) > new Date(),
+                ).length
+              }
             />
+
+            {/* Overdue Tasks (not completed) */}
             <StatsCard
               title="Overdue Tasks"
               value={
                 tasks.filter(
                   (t) =>
-                    new Date(t.dueDate) < new Date() &&
-                    t.status !== "Completed",
+                    new Date(t.DueDate) < new Date() &&
+                    t.Status !== "Completed",
                 ).length
               }
             />

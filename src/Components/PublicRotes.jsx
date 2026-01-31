@@ -15,7 +15,7 @@ export default function PublicRoute({ children }) {
     fetchUser();
   }, []);
 
-  if (loading) return null; // or a loader
+  if (loading) return null;
   if (user) return <Navigate to="/dashboard" replace />;
 
   return children;
