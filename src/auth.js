@@ -42,11 +42,25 @@ export async function getCurrentUser() {
 
 // OAuth login
 export async function loginWithGoogle() {
-  await account.createOAuth2Session(
-    "google",
-    "https://task-manager-1-kappa.vercel.app/dashboard", // success redirect after login
-    "https://task-manager-1-kappa.vercel.app/",
-  );
+  try {
+    // Get the base URL dynamically based on the environment
+    const baseURL = window.location.origin;
+
+    // Set success and failure redirect URLs dynamically
+    const successRedirect = `${baseURL}/dashboard`; // Redirect to dashboard on successful login
+    const failureRedirect = `${baseURL}/`; // Redirect to home on failure
+
+    await account.createOAuth2Session(
+      "google",
+      successRedirect, // Success URL
+      failureRedirect, // Failure URL
+    );
+
+    console.log("Google login initiated successfully!");
+  } catch (error) {
+    console.error("Google login error:", error.message);
+    alert("An error occurred during Google login.");
+  }
 }
 
 export async function logout() {

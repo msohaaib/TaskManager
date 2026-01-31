@@ -4,7 +4,7 @@ import emailIcon from "../assets/icons/email.svg";
 import passwordIcon from "../assets/icons/password.svg";
 import googleIcon from "../assets/icons/Google.svg";
 import { Link } from "react-router-dom";
-import { signup } from "../auth.js";
+import { signup, loginWithGoogle } from "../auth.js";
 
 const SignUp = () => {
   const {
@@ -156,8 +156,12 @@ const SignUp = () => {
           <div className="h-px w-1/3 bg-[#E4E6EC] flex-1"></div>
         </div>
 
-        <div className="flex flex-row mt-6 w-full justify-center">
-          <button className="w-full md:w-45.5 h-11.25 flex flex-row gap-x-3 items-center justify-center border border-[#E4E6EC] rounded-lg">
+        {/* Google Button */}
+        <div className="flex flex-row gap-x-10 mt-6 w-full justify-center">
+          <button
+            onClick={() => loginWithGoogle("google")}
+            className="w-full md:w-45.5 h-11.25 flex flex-row gap-x-3 items-center justify-center border border-[#E4E6EC] rounded-lg"
+          >
             <img src={googleIcon} className="h-6 w-6" alt="Google Icon" />
             <span>Google</span>
           </button>
