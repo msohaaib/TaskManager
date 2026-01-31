@@ -126,21 +126,25 @@ const Dashboard = () => {
         filtered = filtered.filter((t) => t.Status === "In Progress");
         break;
       case "Overdue Tasks":
-        const today = new Date();
-        filtered = filtered.filter(
-          (t) => new Date(t.DueDate) < today && t.Status !== "Completed",
-        );
+        {
+          const today = new Date();
+          filtered = filtered.filter(
+            (t) => new Date(t.DueDate) < today && t.Status !== "Completed",
+          );
+        }
         break;
       default:
         break;
     }
 
     if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
       filtered = filtered.filter(
         (t) =>
-          t.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          t.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          t.status.toLowerCase().includes(searchQuery.toLowerCase()),
+          t.Name.toLowerCase().includes(q) ||
+          t.Description?.toLowerCase().includes(q) ||
+          t.Status.toLowerCase().includes(q) ||
+          t.Priority.toLowerCase().includes(q),
       );
     }
 

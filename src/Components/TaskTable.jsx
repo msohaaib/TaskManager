@@ -12,6 +12,13 @@ export default function TaskTable({ tasks, onEdit, onDelete }) {
     }
   };
 
+  const getStatusDisplay = (task) => {
+    if (task.Status !== "Completed" && new Date(task.DueDate) < new Date()) {
+      return "Overdue";
+    }
+    return task.Status;
+  };
+
   return (
     <div className="overflow-x-auto mt-4">
       <table className="min-w-full bg-white shadow rounded">
@@ -22,7 +29,7 @@ export default function TaskTable({ tasks, onEdit, onDelete }) {
             <th className="text-left p-3">Due Date</th>
             <th className="text-left p-3">Priority</th>
             <th className="text-left p-3">Status</th>
-            <th className="text-left p-3">Actions</th> {/* New column */}
+            <th className="text-left p-3">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -35,14 +42,12 @@ export default function TaskTable({ tasks, onEdit, onDelete }) {
               </td>
               <td className="p-3">
                 <span
-                  className={`px-2 py-1 rounded font-semibold ${getPriorityColor(
-                    task.Priority,
-                  )}`}
+                  className={`px-2 py-1 rounded font-semibold ${getPriorityColor(task.Priority)}`}
                 >
                   {task.Priority}
                 </span>
               </td>
-              <td className="p-3">{task.Status}</td>
+              <td className="p-3">{getStatusDisplay(task)}</td>
               <td className="p-3 flex gap-2">
                 <button
                   onClick={() => onEdit(task)}

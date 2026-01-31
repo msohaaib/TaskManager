@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 
 const TaskModal = ({ isOpen, onClose, onSave, task }) => {
   const priorityOptions = ["High", "Medium", "Low"];
-  const statusOptions = ["In Progress", "Completed"];
+  const statusOptions = ["Pending", "In Progress", "Completed"];
 
   // Initialize formData based on task (edit) or defaults (add)
   const [formData, setFormData] = useState({
     Name: "",
     Description: "",
     Priority: "Medium",
-    Status: "In Progress",
+    Status: "Pending",
     DueDate: "",
   });
 
@@ -20,7 +20,7 @@ const TaskModal = ({ isOpen, onClose, onSave, task }) => {
         Name: task.Name || "",
         Description: task.Description || "",
         Priority: task.Priority || "Medium",
-        Status: task.Status || "In Progress",
+        Status: task.Status || "Pending",
         DueDate: task.DueDate ? task.DueDate.split("T")[0] : "", // format YYYY-MM-DD
       });
     } else {
@@ -28,7 +28,7 @@ const TaskModal = ({ isOpen, onClose, onSave, task }) => {
         Name: "",
         Description: "",
         Priority: "Medium",
-        Status: "In Progress",
+        Status: "Pending",
         DueDate: "",
       });
     }
