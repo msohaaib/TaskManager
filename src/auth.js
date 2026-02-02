@@ -66,7 +66,6 @@ export async function loginWithGoogle() {
 export async function logout() {
   try {
     await account.deleteSession("current");
-    alert("Logged out successfully");
   } catch (error) {
     console.error("Logout error:", error);
   }
